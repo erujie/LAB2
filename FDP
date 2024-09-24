@@ -14,7 +14,7 @@ int main() {
     
     do {
         displayMenu();
-        std::cout << "Enter the Number:";
+        std::cout << "Enter the Number: ";
         std::cin >> choice;
         
         switch (choice) {
@@ -29,11 +29,11 @@ int main() {
             break;
         case 4:
             std::cout << "Exiting...\n";
-            return
+            return 0;
         default:
             std::cout << "Invalid option, please try again.\n";
         }
-    } while (choice !=4);
+    } while (choice != 4);
 
     return 0;
 }
@@ -50,42 +50,41 @@ void listFiles() {
     int option;
     std::string extension, name;
     std::cout << "\t\tLIST FILE DETAILS\n\t-----------------------\n";
-    std::cout << "1. List All Flies\n";
-    std::cout << "2. List Flies by Extensione\n";
+    std::cout << "1. List All Files\n";
+    std::cout << "2. List Files by Extension\n";
     std::cout << "3. List Files by Name Pattern\n";
     std::cin >> option;
 
     switch (option) {
         case 1:
-            for (const auto& entry : fs::directory_iterator(fs::current path())) {
+            for (const auto& entry : fs::directory_iterator(fs::current_path())) {
                 std::cout << entry.path().filename().string() << "\n";
             }
             break;
         case 2:
-            std::cout << "Enter the extension (e.g., .txt) ";
+            std::cout << "Enter the extension (e.g., .txt): ";
             std::cin >> extension;
-            for (const auto& entry: fs::directory_iterator(fs::current_path())) {
-                if (entry.path().extension() == entension) {
+            for (const auto& entry : fs::directory_iterator(fs::current_path())) {
+                if (entry.path().extension() == extension) {
                    std::cout << entry.path().filename().string() << "\n";
-                   }
+                }
             }
             break;
-
         case 3:
             std::cout << "Enter the name pattern (e.g., file*): ";
             std::cin >> name;
-            for (const auto& entry: fs::directory_iterator(fs:current_path())) {
+            for (const auto& entry : fs::directory_iterator(fs::current_path())) {
                 if (entry.path().filename().string().find(name) != std::string::npos) {
                     std::cout << entry.path().filename().string() << "\n";
-                 }
+                }
             }     
             break;
         default:
-            std::cout << "Invalid option, returning to the main menu. \n";
+            std::cout << "Invalid option, returning to the main menu.\n";
     }
 }
 
-void createDirectory() (
+void createDirectory() {
     std::string dirName;
     std::cout << "Enter the Directory name: ";
     std::cin >> dirName;
@@ -96,7 +95,7 @@ void createDirectory() (
         if (fs::create_directory(dirName)) {
             std::cout << dirName << " Directory Successfully Created\n";
         } else {
-            std::cout << "Failed to create directory " << dirName <<".\n";
+            std::cout << "Failed to create directory " << dirName << ".\n";
         }
     }
 }
@@ -106,11 +105,11 @@ void changeDirectory() {
     std::string newDir;
   
     std::cout << "\nCurrent Directory: " << fs::current_path().string() << "\n";
-    std::cout <<"\t\tChange Directory\n\t\t-------------------------\n";
+    std::cout << "\t\tChange Directory\n\t\t-------------------------\n";
     std::cout << "1. Step by Step Backward\n";
     std::cout << "2. Go to Root Directory\n";
     std::cout << "3. Forward Directory\n";
-    std::cout <<"Enter the sumber: ";
+    std::cout << "Enter the number: ";
     std::cin >> option;
 
     switch (option) {
@@ -127,10 +126,10 @@ void changeDirectory() {
                 fs::current_path(newDir);
             } else {
                 std::cout << "Directory does not exist.\n";
+            }
             break;
         default:
-            std::cout <<"Invalid option, returning to the main menu\n";
+            std::cout << "Invalid option, returning to the main menu.\n";
     }
     std::cout << "Current Directory: " << fs::current_path().string() << "\n";
-    
-}    
+}
